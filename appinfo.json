@@ -1,0 +1,14 @@
+{
+    "uuid": "",
+    "name": "成都跑客表盘",
+    "icon": "",
+    "version": "0.0.1",
+    "watchface": "true",
+    "resources": [
+        {
+            "type":"bmp",
+            "name":"RES_BITMAP_RUN",
+            "file":"run.bmp"
+        }
+    ]
+}
