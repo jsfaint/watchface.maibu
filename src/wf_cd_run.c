@@ -31,7 +31,7 @@ static int8_t g_app_mwd_hm_layer_id = -1;
 
 void display_bitmap(P_Window pwindow)
 {
-    if (p_window == NULL) {
+    if (pwindow == NULL) {
         return;
     }
 
@@ -61,7 +61,7 @@ void display_timestr(P_Window pwindow)
 
     P_Layer layer = app_layer_create_text(&lt_hm);
     if(layer != NULL) {
-        g_app_mwd_hm_layer_id = app_window_add_layer(p_window, layer);
+        g_app_mwd_hm_layer_id = app_window_add_layer(pwindow, layer);
     }
 }
 
@@ -71,7 +71,7 @@ void app_mwd_watch_time_change(enum SysEventType type, void *context)
     if (type == SysEventTypeTimeChange)
     {
         /*根据窗口ID获取窗口句柄*/
-        P_Window p_window = app_window_stack_get_window_by_id(g_app_mwd_window_id);
+        P_Window p_window = (P_Window)app_window_stack_get_window_by_id(g_app_mwd_window_id);
         if (NULL == p_window)
             return;
 
