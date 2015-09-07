@@ -1,6 +1,6 @@
 @echo off
-set TL_PATH="C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2014q2\bin"
-set PACK_PATH="d:\Downloads\Pack"
+set TL_PATH=d:\maibu\gcc-arm-none-eabi-4_9-2015q2-20150609-win32\bin
+set PACK_PATH=D:\maibu\Pack\
 
 mkdir build
 
@@ -12,7 +12,7 @@ del .\build\maibu_code
 del OUT.maibu
 
 echo ÕýÔÚ±àÒë...
-%TL_PATH%\arm-none-eabi-gcc -c -mthumb -mcpu=cortex-m0 .\src\*.c -I D:\Downloads\Pack\include\
+%TL_PATH%\arm-none-eabi-gcc -c -mthumb -mcpu=cortex-m0 .\src\*.c -I%PACK_PATH%\include\
 %TL_PATH%\arm-none-eabi-ld -r .\*.o -o .\build\maibu_code
 %TL_PATH%\arm-none-eabi-readelf -a .\build\maibu_code> elf.log
 
