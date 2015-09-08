@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  wf_cd_run.c
+ *       Filename:  main.c
  *         Author:  Jia Sui , jsfaint@gmail.com
- *        Created:  2015/09/06
+ *        Created:  2015/09/07
  *
  *    Description:
- *        A watch face for qiuyuke, with "成都跑客" logo
+ *        罗马队徽表盘
  *
  * =====================================================================================
  */
@@ -80,6 +80,7 @@ void init_text_layer(P_Window pwindow)
     get_left_layer_str(str);
     LayerText lt_hm = {str, frame_hm, GAlignLeft, U_ASCII_ARIAL_14, 0};
     P_Layer layer_hm = app_layer_create_text(&lt_hm);
+    app_layer_set_bg_color(layer_hm, GColorBlack);
 
     if(layer_hm != NULL) {
         g_app_left_layer_id = app_window_add_layer(pwindow, layer_hm);
@@ -88,6 +89,8 @@ void init_text_layer(P_Window pwindow)
     get_right_layer_str(str);
     LayerText lt_md = {str, frame_md, GAlignRight, U_ASCII_ARIAL_14, 0};
     P_Layer layer_md = app_layer_create_text(&lt_md);
+    app_layer_set_bg_color(layer_md, GColorBlack);
+
     if(layer_md != NULL) {
         g_app_right_layer_id = app_window_add_layer(pwindow, layer_md);
     }
