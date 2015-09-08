@@ -1,14 +1,14 @@
 {
-    "uuid": "b2514fa828c157cc4adade1131032b66",
-    "name": "成都跑客表盘",
+    "uuid": "f3bb95de9dac312874d69fc6df81ae86",
+    "name": "罗马队徽",
     "icon": "",
-    "version": "0.0.4",
+    "version": "0.0.1",
     "watchface": "true",
     "resources": [
         {
             "type":"bmp",
-            "name":"RES_BITMAP_RUN",
-            "file":"run.bmp"
+            "name":"RES_BITMAP_ROMA",
+            "file":"roma.bmp"
         }
     ]
 }

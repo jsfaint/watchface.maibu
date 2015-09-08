@@ -33,17 +33,9 @@
 #define RIGHT_LAYER_HEIGHT       16
 #define RIGHT_LAYER_WIDTH       50
 
-/* Enumeration */
-enum state {
-    STATE_DATE,
-    STATE_HEIGHT,
-    STATE_TEMPR
-};
-
 static int8_t g_app_window_id = -1;
 static int8_t g_app_left_layer_id = -1;
 static int8_t g_app_right_layer_id = -1;
-static uint8_t g_app_state = STATE_DATE;
 
 void display_bitmap(P_Window pwindow)
 {
@@ -53,7 +45,7 @@ void display_bitmap(P_Window pwindow)
     GRect frame = {{BG_ORIGIN_X, BG_ORIGIN_Y}, {BG_HEIGHT, BG_WIDTH}}; //Bitmap position
     GBitmap bitmap;
 
-    res_get_user_bitmap(RES_BITMAP_RUN, &bitmap);
+    res_get_user_bitmap(RES_BITMAP_ROMA, &bitmap);
 
     LayerBitmap layer_bitmap = {bitmap, frame, GAlignCenter};
 
@@ -74,31 +66,9 @@ void get_left_layer_str(char *str)
 void get_right_layer_str(char *str)
 {
     struct date_time t;
-    /*SportData data;*/
 
-    switch (g_app_state) {
-        case STATE_DATE:
-            app_service_get_datetime(&t);
-            sprintf(str, "%d/%d", t.mon, t.mday);
-
-            g_app_state = STATE_HEIGHT;
-            break;
-        case STATE_HEIGHT:
-            sprintf(str, "%.1fm", maibu_bsp_pressure_get_height());
-
-            g_app_state = STATE_TEMPR;
-            break;
-        case STATE_TEMPR:
-            sprintf(str, "%.1fC", maibu_bsp_pressure_get_temperature());
-
-            g_app_state = STATE_DATE;
-            break;
-        default:
-            sprintf(str, "Unknown");
-
-            g_app_state = STATE_DATE;
-            break;
-    }
+    app_service_get_datetime(&t);
+    sprintf(str, "%d/%d", t.mon, t.mday);
 }
 
 void init_text_layer(P_Window pwindow)
@@ -110,6 +80,7 @@ void init_text_layer(P_Window pwindow)
     get_left_layer_str(str);
     LayerText lt_hm = {str, frame_hm, GAlignLeft, U_ASCII_ARIAL_14, 0};
     P_Layer layer_hm = app_layer_create_text(&lt_hm);
+
     if(layer_hm != NULL) {
         g_app_left_layer_id = app_window_add_layer(pwindow, layer_hm);
     }
