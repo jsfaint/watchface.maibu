@@ -86,8 +86,6 @@ void app_mwd_watch_time_change(enum SysEventType type, void *context)
         if (NULL == p_left_layer)
             return;
 
-        struct date_time datetime;
-        app_service_get_datetime(&datetime);
         char str[20] = "";
         //Left Layer
         get_left_layer_str(str);
