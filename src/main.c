@@ -24,7 +24,7 @@
 #define BG_WIDTH    128
 
 #define LEFT_LAYER_ORIGIN_X     34
-#define LEFT_LAYER_ORIGIN_Y     34
+#define LEFT_LAYER_ORIGIN_Y     35
 #define LEFT_LAYER_HEIGHT       14
 #define LEFT_LAYER_WIDTH        44
 
@@ -65,7 +65,6 @@ void init_text_layer(P_Window pwindow)
     get_left_layer_str(str);
     LayerText lt_hm = {str, frame_hm, GAlignCenter, U_ASCII_ARIAL_14, 0};
     P_Layer layer_hm = app_layer_create_text(&lt_hm);
-    app_layer_set_bg_color(layer_hm, GColorBlack);
 
     if(layer_hm != NULL) {
         g_app_left_layer_id = app_window_add_layer(pwindow, layer_hm);
