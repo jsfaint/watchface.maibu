@@ -1,14 +1,14 @@
 {
-    "uuid": "f3bb95de9dac312874d69fc6df81ae86",
-    "name": "ÂÞÂí¶Ó»Õ",
+    "uuid": "27005e550bf1c0cb60660144c0deadcb",
+    "name": "Ð¦Á³ÄÐ",
     "icon": "",
-    "version": "0.0.2",
+    "version": "0.0.1",
     "watchface": "true",
     "resources": [
         {
             "type":"bmp",
-            "name":"RES_BITMAP_ROMA",
-            "file":"roma.bmp"
+            "name":"RES_BITMAP_IMAGE",
+            "file":"image.bmp"
         }
     ]
 }
