@@ -140,11 +140,9 @@ void app_mwd_watch_time_change(enum SysEventType type, void *context)
         if (NULL == p_right_layer)
             return;
 
-        struct date_time datetime;
-        app_service_get_datetime(&datetime);
         char str[20] = "";
         //Left Layer
-        sprintf(str, "%d:%02d", datetime.hour, datetime.min);
+        get_left_layer_str(str);
         app_layer_set_text_text(p_left_layer, str);
 
         //Right Layer
