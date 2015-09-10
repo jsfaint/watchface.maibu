@@ -26,12 +26,12 @@
 #define LEFT_LAYER_ORIGIN_X     5
 #define LEFT_LAYER_ORIGIN_Y     110
 #define LEFT_LAYER_HEIGHT       16
-#define LEFT_LAYER_WIDTH       50
+#define LEFT_LAYER_WIDTH        50
 
 #define RIGHT_LAYER_ORIGIN_X     72
 #define RIGHT_LAYER_ORIGIN_Y     110
 #define RIGHT_LAYER_HEIGHT       16
-#define RIGHT_LAYER_WIDTH       50
+#define RIGHT_LAYER_WIDTH        50
 
 static int8_t g_app_window_id = -1;
 static int8_t g_app_left_layer_id = -1;
@@ -73,26 +73,26 @@ void get_right_layer_str(char *str)
 
 void init_text_layer(P_Window pwindow)
 {
-    GRect frame_hm = {{LEFT_LAYER_ORIGIN_X, LEFT_LAYER_ORIGIN_Y}, {LEFT_LAYER_HEIGHT, LEFT_LAYER_WIDTH}}; //hour:minute
-    GRect frame_md = {{RIGHT_LAYER_ORIGIN_X, RIGHT_LAYER_ORIGIN_Y}, {RIGHT_LAYER_HEIGHT, RIGHT_LAYER_WIDTH}}; //month/day
+    GRect frame_left = {{LEFT_LAYER_ORIGIN_X, LEFT_LAYER_ORIGIN_Y}, {LEFT_LAYER_HEIGHT, LEFT_LAYER_WIDTH}}; //hour:minute
+    GRect frame_right = {{RIGHT_LAYER_ORIGIN_X, RIGHT_LAYER_ORIGIN_Y}, {RIGHT_LAYER_HEIGHT, RIGHT_LAYER_WIDTH}}; //month/day
     char str[20] = "";
 
     get_left_layer_str(str);
-    LayerText lt_hm = {str, frame_hm, GAlignLeft, U_ASCII_ARIAL_14, 0};
-    P_Layer layer_hm = app_layer_create_text(&lt_hm);
-    app_layer_set_bg_color(layer_hm, GColorBlack);
+    LayerText lt_left = {str, frame_left, GAlignLeft, U_ASCII_ARIAL_14, 0};
+    P_Layer layer_left = app_layer_create_text(&lt_left);
+    app_layer_set_bg_color(layer_left, GColorBlack);
 
-    if(layer_hm != NULL) {
-        g_app_left_layer_id = app_window_add_layer(pwindow, layer_hm);
+    if(layer_left != NULL) {
+        g_app_left_layer_id = app_window_add_layer(pwindow, layer_left);
     }
 
     get_right_layer_str(str);
-    LayerText lt_md = {str, frame_md, GAlignRight, U_ASCII_ARIAL_14, 0};
-    P_Layer layer_md = app_layer_create_text(&lt_md);
-    app_layer_set_bg_color(layer_md, GColorBlack);
+    LayerText lt_right = {str, frame_right, GAlignRight, U_ASCII_ARIAL_14, 0};
+    P_Layer layer_right = app_layer_create_text(&lt_right);
+    app_layer_set_bg_color(layer_right, GColorBlack);
 
-    if(layer_md != NULL) {
-        g_app_right_layer_id = app_window_add_layer(pwindow, layer_md);
+    if(layer_right != NULL) {
+        g_app_right_layer_id = app_window_add_layer(pwindow, layer_right);
     }
 }
 
