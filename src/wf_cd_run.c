@@ -20,24 +20,30 @@
 /* Definition */
 #define BG_ORIGIN_X 0
 #define BG_ORIGIN_Y 0
-#define BG_HEIGHT   128
+#define BG_HEIGHT   85
 #define BG_WIDTH   128
 
-#define LEFT_LAYER_ORIGIN_X     5
-#define LEFT_LAYER_ORIGIN_Y     110
-#define LEFT_LAYER_HEIGHT       16
-#define LEFT_LAYER_WIDTH       50
+#define LEFT_LAYER_ORIGIN_X     10
+#define LEFT_LAYER_ORIGIN_Y     83
+#define LEFT_LAYER_HEIGHT       18
+#define LEFT_LAYER_WIDTH        59
 
-#define RIGHT_LAYER_ORIGIN_X     72
-#define RIGHT_LAYER_ORIGIN_Y     110
-#define RIGHT_LAYER_HEIGHT       16
-#define RIGHT_LAYER_WIDTH       50
+#define RIGHT_LAYER_ORIGIN_X    63
+#define RIGHT_LAYER_ORIGIN_Y    83
+#define RIGHT_LAYER_HEIGHT      18
+#define RIGHT_LAYER_WIDTH       58
+
+#define BANNER_LAYER_ORIGIN_X    1
+#define BANNER_LAYER_ORIGIN_Y    108
+#define BANNER_LAYER_HEIGHT      18
+#define BANNER_LAYER_WIDTH       126
 
 /* Enumeration */
 enum state {
     STATE_DATE,
     STATE_HEIGHT,
-    STATE_TEMPR
+    STATE_TEMPR,
+    STATE_SPORT
 };
 
 static int8_t g_app_window_id = -1;
@@ -74,22 +80,32 @@ void get_left_layer_str(char *str)
 void get_right_layer_str(char *str)
 {
     struct date_time t;
-    /*SportData data;*/
+    SportData data;
+    float tmp1 = 0;
+    float tmp2 = 0;
 
     switch (g_app_state) {
         case STATE_DATE:
             app_service_get_datetime(&t);
-            sprintf(str, "%d/%d", t.mon, t.mday);
+            sprintf(str, "%d月%d日", t.mon, t.mday);
 
             g_app_state = STATE_HEIGHT;
             break;
         case STATE_HEIGHT:
-            sprintf(str, "%.1fm", maibu_bsp_pressure_get_height());
+            maibu_get_altitude(&tmp1, &tmp2);
+            sprintf(str, "%d.%d米", tmp1, tmp2);
 
             g_app_state = STATE_TEMPR;
             break;
         case STATE_TEMPR:
-            sprintf(str, "%.1fC", maibu_bsp_pressure_get_temperature());
+            maibu_get_temperature(&tmp1);
+            sprintf(str, "%.1f度", tmp1);
+
+            g_app_state = STATE_SPORT;
+            break;
+        case STATE_SPORT:
+            maibu_get_sport_data(&data, 0);
+            sprintf(str, "%d步", data.step);
 
             g_app_state = STATE_DATE;
             break;
@@ -105,7 +121,8 @@ void init_text_layer(P_Window pwindow)
 {
     GRect frame_hm = {{LEFT_LAYER_ORIGIN_X, LEFT_LAYER_ORIGIN_Y}, {LEFT_LAYER_HEIGHT, LEFT_LAYER_WIDTH}}; //hour:minute
     GRect frame_md = {{RIGHT_LAYER_ORIGIN_X, RIGHT_LAYER_ORIGIN_Y}, {RIGHT_LAYER_HEIGHT, RIGHT_LAYER_WIDTH}}; //month/day
-    char str[20] = "";
+    GRect frame_banner = {{BANNER_LAYER_ORIGIN_X, BANNER_LAYER_ORIGIN_Y}, {BANNER_LAYER_HEIGHT, BANNER_LAYER_WIDTH}};
+    char str[30] = "";
 
     get_left_layer_str(str);
     LayerText lt_hm = {str, frame_hm, GAlignLeft, U_ASCII_ARIAL_14, 0};
@@ -119,6 +136,13 @@ void init_text_layer(P_Window pwindow)
     P_Layer layer_md = app_layer_create_text(&lt_md);
     if(layer_md != NULL) {
         g_app_right_layer_id = app_window_add_layer(pwindow, layer_md);
+    }
+
+    sprintf(str, "一次改变  一生陪伴");
+    LayerText lt_banner = {str, frame_banner, GAlignCenter, U_ASCII_ARIALBD_12, 0};
+    P_Layer layer_banner = app_layer_create_text(&lt_banner);
+    if (layer_banner != NULL) {
+        app_window_add_layer(pwindow, layer_banner);
     }
 }
 
