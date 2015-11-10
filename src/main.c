@@ -20,15 +20,15 @@
 #define BG_HEIGHT   128
 #define BG_WIDTH   128
 
-#define LEFT_LAYER_ORIGIN_X     5
+#define LEFT_LAYER_ORIGIN_X     10
 #define LEFT_LAYER_ORIGIN_Y     110
 #define LEFT_LAYER_HEIGHT       16
-#define LEFT_LAYER_WIDTH        50
+#define LEFT_LAYER_WIDTH        59
 
-#define RIGHT_LAYER_ORIGIN_X     72
+#define RIGHT_LAYER_ORIGIN_X     63
 #define RIGHT_LAYER_ORIGIN_Y     110
 #define RIGHT_LAYER_HEIGHT       16
-#define RIGHT_LAYER_WIDTH        50
+#define RIGHT_LAYER_WIDTH        58
 
 /* Enumeration */
 enum state {
