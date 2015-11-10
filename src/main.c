@@ -112,7 +112,7 @@ void init_text_layer(P_Window pwindow)
     char str[30] = "";
 
     get_left_layer_str(str);
-    LayerText lt_left = {str, frame_left, GAlignLeft, U_ASCII_ARIAL_14, 0};
+    LayerText lt_left = {str, frame_left, GAlignLeft, U_ASCII_ARIAL_16, 0};
     P_Layer layer_left = app_layer_create_text(&lt_left);
 
     if(layer_left != NULL) {
@@ -120,7 +120,7 @@ void init_text_layer(P_Window pwindow)
     }
 
     get_right_layer_str(str);
-    LayerText lt_right = {str, frame_right, GAlignRight, U_ASCII_ARIAL_14, 0};
+    LayerText lt_right = {str, frame_right, GAlignRight, U_ASCII_ARIAL_16, 0};
     P_Layer layer_right = app_layer_create_text(&lt_right);
 
     if(layer_right != NULL) {
