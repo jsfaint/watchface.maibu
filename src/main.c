@@ -79,7 +79,7 @@ void get_right_layer_str(char *str)
     switch (g_app_state) {
         case STATE_DATE:
             app_service_get_datetime(&t);
-            sprintf(str, "%d月%d日", t.mon, t.mday);
+            sprintf(str, "%d/%d", t.mon, t.mday);
 
             g_app_state = STATE_HEIGHT;
             break;
