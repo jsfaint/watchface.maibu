@@ -5,9 +5,6 @@
  *         Author:  Jia Sui , jsfaint@gmail.com
  *        Created:  2015/09/07
  *
- *    Description:
- *        罗马队徽表盘
- *
  * =====================================================================================
  */
 #include <stdlib.h>
@@ -33,9 +30,18 @@
 #define RIGHT_LAYER_HEIGHT       16
 #define RIGHT_LAYER_WIDTH        50
 
+/* Enumeration */
+enum state {
+    STATE_DATE,
+    STATE_HEIGHT,
+    STATE_TEMPR,
+    STATE_SPORT
+};
+
 static int8_t g_app_window_id = -1;
 static int8_t g_app_left_layer_id = -1;
 static int8_t g_app_right_layer_id = -1;
+static uint8_t g_app_state = STATE_DATE;
 
 void display_bitmap(P_Window pwindow)
 {
@@ -45,7 +51,7 @@ void display_bitmap(P_Window pwindow)
     GRect frame = {{BG_ORIGIN_X, BG_ORIGIN_Y}, {BG_HEIGHT, BG_WIDTH}}; //Bitmap position
     GBitmap bitmap;
 
-    res_get_user_bitmap(RES_BITMAP_ROMA, &bitmap);
+    res_get_user_bitmap(RES_BITMAP_BG, &bitmap);
 
     LayerBitmap layer_bitmap = {bitmap, frame, GAlignCenter};
 
@@ -66,9 +72,41 @@ void get_left_layer_str(char *str)
 void get_right_layer_str(char *str)
 {
     struct date_time t;
+    SportData data;
+    float tmp1 = 0;
+    float tmp2 = 0;
 
-    app_service_get_datetime(&t);
-    sprintf(str, "%d/%d", t.mon, t.mday);
+    switch (g_app_state) {
+        case STATE_DATE:
+            app_service_get_datetime(&t);
+            sprintf(str, "%d月%d日", t.mon, t.mday);
+
+            g_app_state = STATE_HEIGHT;
+            break;
+        case STATE_HEIGHT:
+            maibu_get_altitude(&tmp1, &tmp2);
+            sprintf(str, "%d.%d米", tmp1, tmp2);
+
+            g_app_state = STATE_TEMPR;
+            break;
+        case STATE_TEMPR:
+            maibu_get_temperature(&tmp1);
+            sprintf(str, "%.1f度", tmp1);
+
+            g_app_state = STATE_SPORT;
+            break;
+        case STATE_SPORT:
+            maibu_get_sport_data(&data, 0);
+            sprintf(str, "%d步", data.step);
+
+            g_app_state = STATE_DATE;
+            break;
+        default:
+            sprintf(str, "Unknown");
+
+            g_app_state = STATE_DATE;
+            break;
+    }
 }
 
 void init_text_layer(P_Window pwindow)
@@ -80,7 +118,6 @@ void init_text_layer(P_Window pwindow)
     get_left_layer_str(str);
     LayerText lt_left = {str, frame_left, GAlignLeft, U_ASCII_ARIAL_14, 0};
     P_Layer layer_left = app_layer_create_text(&lt_left);
-    app_layer_set_bg_color(layer_left, GColorBlack);
 
     if(layer_left != NULL) {
         g_app_left_layer_id = app_window_add_layer(pwindow, layer_left);
@@ -89,7 +126,6 @@ void init_text_layer(P_Window pwindow)
     get_right_layer_str(str);
     LayerText lt_right = {str, frame_right, GAlignRight, U_ASCII_ARIAL_14, 0};
     P_Layer layer_right = app_layer_create_text(&lt_right);
-    app_layer_set_bg_color(layer_right, GColorBlack);
 
     if(layer_right != NULL) {
         g_app_right_layer_id = app_window_add_layer(pwindow, layer_right);
