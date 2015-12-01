@@ -12,7 +12,7 @@
 #include <string.h>
 
 #include "maibu_sdk.h"
-#include "maibu_res.h"
+#include "../build/maibu_res.h"
 
 /* Definition */
 #define BG_ORIGIN_X 0
@@ -113,7 +113,7 @@ void init_text_layer(P_Window pwindow)
 {
     GRect frame_left = {{LEFT_LAYER_ORIGIN_X, LEFT_LAYER_ORIGIN_Y}, {LEFT_LAYER_HEIGHT, LEFT_LAYER_WIDTH}}; //hour:minute
     GRect frame_right = {{RIGHT_LAYER_ORIGIN_X, RIGHT_LAYER_ORIGIN_Y}, {RIGHT_LAYER_HEIGHT, RIGHT_LAYER_WIDTH}}; //month/day
-    char str[20] = "";
+    char str[30] = "";
 
     get_left_layer_str(str);
     LayerText lt_left = {str, frame_left, GAlignLeft, U_ASCII_ARIAL_14, 0};
@@ -150,7 +150,7 @@ void app_mwd_watch_time_change(enum SysEventType type, void *context)
         if (NULL == p_right_layer)
             return;
 
-        char str[20] = "";
+        char str[30] = "";
         //Left Layer
         get_left_layer_str(str);
         app_layer_set_text_text(p_left_layer, str);
