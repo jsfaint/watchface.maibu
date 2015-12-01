@@ -15,7 +15,7 @@
 #include <string.h>
 
 #include "maibu_sdk.h"
-#include "maibu_res.h"
+#include "../build/maibu_res.h"
 
 /* Definition */
 #define BG_ORIGIN_X 0
@@ -164,7 +164,7 @@ void app_mwd_watch_time_change(enum SysEventType type, void *context)
         if (NULL == p_right_layer)
             return;
 
-        char str[20] = "";
+        char str[30] = "";
         //Left Layer
         get_left_layer_str(str);
         app_layer_set_text_text(p_left_layer, str);
