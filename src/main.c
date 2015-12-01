@@ -15,7 +15,7 @@
 #include <string.h>
 
 #include "maibu_sdk.h"
-#include "maibu_res.h"
+#include "../build/maibu_res.h"
 
 /* Definition */
 #define BG_ORIGIN_X 0
