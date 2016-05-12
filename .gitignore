@@ -1,5 +1,4 @@
 build
-*.MWP
+*.MAI
 *.log
-src/maibu_res.h
 *.maibu
