@@ -10,10 +10,6 @@
  *
  * =====================================================================================
  */
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
 #include "maibu_sdk.h"
 #include "../build/maibu_res.h"
 
@@ -28,7 +24,7 @@
 #define LEFT_LAYER_HEIGHT       14
 #define LEFT_LAYER_WIDTH        44
 
-static int8_t g_app_window_id = -1;
+static int32_t g_app_window_id = -1;
 static int8_t g_app_left_layer_id = -1;
 
 void display_bitmap(P_Window pwindow)
