@@ -119,4 +119,6 @@ int main()
         /*放入窗口栈显示*/
         g_app_window_id = app_window_stack_push(p_window);
     }
+
+    return 0;
 }
