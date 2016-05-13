@@ -16,12 +16,12 @@
 #define BG_HEIGHT   128
 #define BG_WIDTH   128
 
-#define LEFT_LAYER_ORIGIN_X     10
+#define LEFT_LAYER_ORIGIN_X     2
 #define LEFT_LAYER_ORIGIN_Y     110
 #define LEFT_LAYER_HEIGHT       16
 #define LEFT_LAYER_WIDTH        59
 
-#define RIGHT_LAYER_ORIGIN_X     63
+#define RIGHT_LAYER_ORIGIN_X     68
 #define RIGHT_LAYER_ORIGIN_Y     110
 #define RIGHT_LAYER_HEIGHT       16
 #define RIGHT_LAYER_WIDTH        58
@@ -114,6 +114,8 @@ void init_text_layer(P_Window pwindow)
     get_left_layer_str(str);
     LayerText lt_left = {str, frame_left, GAlignLeft, U_ASCII_ARIAL_14, 0};
     P_Layer layer_left = app_layer_create_text(&lt_left);
+    app_layer_set_bg_color(layer_left, GColorBlack);
+
 
     if(layer_left != NULL) {
         g_app_left_layer_id = app_window_add_layer(pwindow, layer_left);
@@ -122,6 +124,7 @@ void init_text_layer(P_Window pwindow)
     get_right_layer_str(str);
     LayerText lt_right = {str, frame_right, GAlignRight, U_ASCII_ARIAL_14, 0};
     P_Layer layer_right = app_layer_create_text(&lt_right);
+    app_layer_set_bg_color(layer_right, GColorBlack);
 
     if(layer_right != NULL) {
         g_app_right_layer_id = app_window_add_layer(pwindow, layer_right);
