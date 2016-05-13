@@ -81,7 +81,7 @@ void get_right_layer_str(char *str)
             break;
         case STATE_HEIGHT:
             maibu_get_altitude(&tmp1, &tmp2);
-            sprintf(str, "%d.%d米", tmp1, tmp2);
+            sprintf(str, "%.0f.%.0f米", tmp1, tmp2);
 
             g_app_state = STATE_TEMPR;
             break;
