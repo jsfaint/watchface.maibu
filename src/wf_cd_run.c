@@ -10,10 +10,6 @@
  *
  * =====================================================================================
  */
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
 #include "maibu_sdk.h"
 #include "../build/maibu_res.h"
 
@@ -46,7 +42,7 @@ enum state {
     STATE_SPORT
 };
 
-static int8_t g_app_window_id = -1;
+static int32_t g_app_window_id = -1;
 static int8_t g_app_left_layer_id = -1;
 static int8_t g_app_right_layer_id = -1;
 static uint8_t g_app_state = STATE_DATE;
